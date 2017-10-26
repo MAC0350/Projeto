@@ -23,7 +23,7 @@ id SERIAL NOT NULL,
 username VARCHAR(50) NOT NULL UNIQUE,
 email VARCHAR(50) NOT NULL,
 senha VARCHAR(30) NOT NULL,
-data_horario_criacao TIMESTAMP NOT NULL,
+data_horario_criacao TIMESTAMP NOT NULL DEFAULT current_timestamp,
 PRIMARY KEY(id)
 );
 
@@ -32,7 +32,7 @@ CREATE TABLE mensagem
 id SERIAL NOT NULL,
 titulo VARCHAR(100) NOT NULL,
 corpo VARCHAR(300),
-data_horario TIMESTAMP NOT NULL,
+data_horario TIMESTAMP NOT NULL DEFAULT current_timestamp,
 PRIMARY KEY(id)
 );
 
@@ -40,7 +40,7 @@ CREATE TABLE grupo
 (
 id SERIAL NOT NULL,
 nome VARCHAR(50) NOT NULL UNIQUE,
-data_horario_criacao TIMESTAMP NOT NULL,
+data_horario_criacao TIMESTAMP NOT NULL DEFAULT current_timestamp,
 PRIMARY KEY(id)
 );
 
@@ -49,7 +49,7 @@ CREATE TABLE projeto
 id SERIAL NOT NULL,
 titulo VARCHAR(100) NOT NULL,
 descricao VARCHAR(500),
-data_horario_criacao TIMESTAMP NOT NULL,
+data_horario_criacao TIMESTAMP NOT NULL DEFAULT current_timestamp,
 grupo_id INTEGER NOT NULL,
 PRIMARY KEY(id),
 FOREIGN KEY(grupo_id) REFERENCES grupo(id)
@@ -62,7 +62,7 @@ id SERIAL NOT NULL,
 titulo VARCHAR(100) NOT NULL,
 descricao VARCHAR(300),
 prazo DATE NOT NULL,
-data_horario_criacao TIMESTAMP NOT NULL,
+data_horario_criacao TIMESTAMP NOT NULL DEFAULT current_timestamp,
 grupo_id INTEGER NOT NULL,
 PRIMARY KEY(id),
 FOREIGN KEY(grupo_id) REFERENCES grupo(id)
@@ -80,8 +80,8 @@ CREATE TABLE administra
 (
 grupo_id INTEGER NOT NULL,
 user_id INTEGER NOT NULL,
-data_inicio TIMESTAMP NOT NULL,
-data_fim TIMESTAMP NOT NULL CHECK (data_fim > data_inicio),
+data_inicio TIMESTAMP NOT NULL DEFAULT current_timestamp,
+data_fim TIMESTAMP CHECK (data_fim > data_inicio),
 PRIMARY KEY(grupo_id, user_id),
 FOREIGN KEY(grupo_id) REFERENCES grupo(id)
   ON DELETE CASCADE ON UPDATE CASCADE,
@@ -93,8 +93,8 @@ CREATE TABLE participa_de
 (
 grupo_id INTEGER NOT NULL,
 user_id INTEGER NOT NULL,
-data_inicio TIMESTAMP NOT NULL,
-data_fim TIMESTAMP NOT NULL CHECK (data_fim > data_inicio),
+data_inicio TIMESTAMP NOT NULL DEFAULT current_timestamp,
+data_fim TIMESTAMP CHECK (data_fim > data_inicio),
 PRIMARY KEY(grupo_id, user_id),
 FOREIGN KEY(grupo_id) REFERENCES grupo(id)
   ON DELETE CASCADE ON UPDATE CASCADE,
@@ -218,3 +218,75 @@ FOREIGN KEY(mensagem_id) REFERENCES mensagem(id)
 -- Consulta envolvendo, no mínimo, 3 relações:
 -- (Descrição da consulta)
 -----------------------------------------------------------------------
+
+INSERT INTO usuario (id, username, email, senha) VALUES (1, "ian", "ian@ime.usp.br", "123456");
+INSERT INTO usuario (id, username, email, senha) VALUES (2, "leonardo", "leonardo@ime.usp.br", "leonardo_123");
+INSERT INTO usuario (id, username, email, senha) VALUES (3, "isabella", "isabella@ime.usp.br", "isabella_123");
+INSERT INTO usuario (id, username, email, senha) VALUES (4, "bruno", "bruno@ime.usp.br", "bruno_123");
+INSERT INTO usuario (id, username, email, senha) VALUES (5, "eduardo", "eduardo@ime.usp.br", "eduardo_123");
+INSERT INTO usuario (id, username, email, senha) VALUES (6, "jef", "jef@ime.usp.br", "jef_123");
+
+INSERT INTO grupo (id, nome) VALUES (1, "MAC0350");
+
+INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 1);
+INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 2);
+INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 3);
+INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 4);
+INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 5);
+INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 6);
+
+INSERT INTO administra VALUES (1, 6, current_timestamp, '2022-12-25');
+
+INSERT INTO projeto VALUES (1, "EP2", "Aprofundando em SQL", current_timestamp, 1);
+
+INSERT INTO atividade VALUES (1, "Criacao Modelo fisico", "Criar o modelo fisico para a tabela", "2017-10-26", current_timestamp, 1);
+
+INSERT INTO atividade VALUES (2, "Queries no BD", "Realizar queries que envolvam ao menos tres relacoes no banco de dados", "2017-10-26", current_timestamp, 1);
+
+INSERT INTO tag VALUES ("Vermelho", "Alta prioridade");
+INSERT INTO tag VALUES ("Verde", "Entregue");
+
+INSERT INTO possui VALUES (1, "Vermelho", "Alta prioridade");
+INSERT INTO possui VALUES (2, "Verde", "Entregue");
+
+
+INSERT INTO usuario_atividade VALUES (1, 1);
+INSERT INTO usuario_atividade VALUES (3, 1);
+
+INSERT INTO convida VALUES (6, 1, 1, current_timestamp);
+INSERT INTO convida VALUES (6, 2, 1, current_timestamp);
+INSERT INTO convida VALUES (6, 3, 1, current_timestamp);
+INSERT INTO convida VALUES (6, 4, 1, current_timestamp);
+INSERT INTO convida VALUES (6, 5, 1, current_timestamp);
+
+
+INSERT INTO mensagem VALUES (1, "Entrega tarefa", "Ola, professor. Entreguei a atividade 1 que estava sob minha responsabilidade", current_timestamp);
+
+INSERT INTO mensagem VALUES (2, "Status Grupo", "Ola, jef. Acredito que vamos atrasar, precisamos melhorar a distribuicao das tarefas", current_timestamp);
+
+INSERT INTO mensagem VALUES (3, "Ajuda", "Jef, nao estou conseguindo avancar na tarefa pois estou tendo dificuldades em comunicar com o BD, pode me ajudar?", current_timestamp);
+
+INSERT INTO mensagem VALUES (4, "Tarefa", "Ola, Isa. Como esta a entrega da tarefa? Preciso dela para dar continuidade ao meu trabalho", current_timestamp);
+
+INSERT INTO mensagem VALUES (5, "Cobranca", "Vamos, Ian, termina essa tarefa, temos um prazo a cumprir", current_timestamp);
+
+
+INSERT INTO envia VALUES (1, 6, 1);
+INSERT INTO envia VALUES (3, 6, 2);
+INSERT INTO envia VALUES (2, 6, 3);
+INSERT INTO envia VALUES (5, 3, 4);
+INSERT INTO envia VALUES (3, 1, 5);
+
+
+
+
+SELECT remetente.username, destinatario.username, mensagem.titulo, mensagem.corpo
+FROM envia
+    INNER JOIN mensagem 
+        ON mensagem.id = envia.mensagem_id
+    INNER JOIN usuario as remetente
+        ON remetente.id = envia.user_remetente
+    INNER JOIN usuario as destinatario
+        ON destinatario.id = envia.user_destinatario
+    WHERE user_destinatario = 6;
+        
