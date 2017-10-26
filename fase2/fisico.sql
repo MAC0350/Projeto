@@ -1,3 +1,19 @@
+/* ================================================================= *
+ |               MAC0350 - Prof. João Eduardo Ferreira               |
+ |                          Projeto - Fase 2                         |
+ |                                                                   |
+ | Componentes do grupo:                                             |
+ | - (4460596) Bruno Guilherme Ricci Lucas                           |
+ | - (8936798) Eduardo Pinheiro                                      |
+ | - (7959725) Ian Carvalho                                          |
+ | - (8536200) Isabella Mendonça                                     |
+ | - (8536065) Leonardo Pereira Macedo                               |
+ * ================================================================= */
+
+-----------------------------------------------------------------------
+-- Criação do modelo físico
+-----------------------------------------------------------------------
+
 CREATE SCHEMA sistema_gerenciamento_projetos;
 SET SEARCH_PATH TO sistema_gerenciamento_projetos;
 
@@ -193,3 +209,12 @@ FOREIGN KEY(user_destinatario) REFERENCES usuario(id)
 FOREIGN KEY(mensagem_id) REFERENCES mensagem(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-----------------------------------------------------------------------
+-- Inserção de tuplas para povoar o BD
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+-- Consulta envolvendo, no mínimo, 3 relações:
+-- (Descrição da consulta)
+-----------------------------------------------------------------------
