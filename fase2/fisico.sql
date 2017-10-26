@@ -92,13 +92,13 @@ FOREIGN KEY(user_id) REFERENCES usuario(id)
 CREATE TABLE participa_de
 (
 grupo_id INTEGER NOT NULL,
-user_id INTEGER NOT NULL,
+projeto_id INTEGER NOT NULL,
 data_inicio TIMESTAMP NOT NULL DEFAULT current_timestamp,
 data_fim TIMESTAMP CHECK (data_fim > data_inicio),
 PRIMARY KEY(grupo_id, user_id),
 FOREIGN KEY(grupo_id) REFERENCES grupo(id)
   ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY(user_id) REFERENCES usuario(id)
+FOREIGN KEY(projeto_id) REFERENCES projeto(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -223,16 +223,11 @@ INSERT INTO usuario (id, username, email, senha) VALUES (6, "jef", "jef@ime.usp.
 
 INSERT INTO grupo (id, nome) VALUES (1, "MAC0350");
 
-INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 1);
-INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 2);
-INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 3);
-INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 4);
-INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 5);
-INSERT INTO participa_de (grupo_id, user_id) VALUES (1, 6);
+INSERT INTO projeto VALUES (1, "EP2", "Aprofundando em SQL", current_timestamp, 1);
+
+INSERT INTO participa_de (grupo_id, projeto_id) VALUES (1, 1);
 
 INSERT INTO administra VALUES (1, 6, current_timestamp, '2022-12-25');
-
-INSERT INTO projeto VALUES (1, "EP2", "Aprofundando em SQL", current_timestamp, 1);
 
 INSERT INTO atividade VALUES (1, "Criacao Modelo fisico", "Criar o modelo fisico para a tabela", "2017-10-26", current_timestamp, 1);
 
