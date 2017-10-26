@@ -113,7 +113,7 @@ FOREIGN KEY(atividade_id) REFERENCES atividade(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE usuario_grupo
+CREATE TABLE pertence_a
 (
 user_id INTEGER NOT NULL,
 grupo_id INTEGER NOT NULL,
@@ -199,7 +199,6 @@ FOREIGN KEY(projeto_id) REFERENCES projeto(id)
 CREATE TABLE envia
 (
 user_remetente INTEGER NOT NULL,
-user_destinatario INTEGER NOT NULL,
 mensagem_id INTEGER NOT NULL,
 PRIMARY KEY(user_remetente, user_destinatario, mensagem_id),
 FOREIGN KEY(user_remetente) REFERENCES usuario(id)
@@ -227,10 +226,15 @@ INSERT INTO projeto VALUES (1, "EP2", "Aprofundando em SQL", current_timestamp, 
 
 INSERT INTO participa_de (grupo_id, projeto_id) VALUES (1, 1);
 
+INSERT INTO pertence_a (user_id, grupo_id) VALUES (1, 1);
+INSERT INTO pertence_a (user_id, grupo_id) VALUES (2, 1);
+INSERT INTO pertence_a (user_id, grupo_id) VALUES (3, 1);
+INSERT INTO pertence_a (user_id, grupo_id) VALUES (4, 1);
+INSERT INTO pertence_a (user_id, grupo_id) VALUES (5, 1);
+INSERT INTO pertence_a (user_id, grupo_id) VALUES (6, 1);
+
 INSERT INTO administra VALUES (1, 6, current_timestamp, '2022-12-25');
-
 INSERT INTO atividade VALUES (1, "Criacao Modelo fisico", "Criar o modelo fisico para a tabela", "2017-10-26", current_timestamp, 1);
-
 INSERT INTO atividade VALUES (2, "Queries no BD", "Realizar queries que envolvam ao menos tres relacoes no banco de dados", "2017-10-26", current_timestamp, 1);
 
 INSERT INTO tag VALUES ("Vermelho", "Alta prioridade");
@@ -254,12 +258,11 @@ INSERT INTO mensagem VALUES (3, "Ajuda", "Jef, nao estou conseguindo avancar na 
 INSERT INTO mensagem VALUES (4, "Tarefa", "Ola, Isa. Como esta a entrega da tarefa? Preciso dela para dar continuidade ao meu trabalho", current_timestamp);
 INSERT INTO mensagem VALUES (5, "Cobranca", "Vamos, Ian, termina essa tarefa, temos um prazo a cumprir", current_timestamp);
 
-
-INSERT INTO envia VALUES (1, 6, 1);
-INSERT INTO envia VALUES (3, 6, 2);
-INSERT INTO envia VALUES (2, 6, 3);
-INSERT INTO envia VALUES (5, 3, 4);
-INSERT INTO envia VALUES (3, 1, 5);
+INSERT INTO envia VALUES (1, 1);
+INSERT INTO envia VALUES (3, 2);
+INSERT INTO envia VALUES (2, 3);
+INSERT INTO envia VALUES (5, 4);
+INSERT INTO envia VALUES (3, 5);
 
 -----------------------------------------------------------------------
 -- Consulta envolvendo, no mínimo, 3 relações:
