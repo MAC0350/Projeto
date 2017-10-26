@@ -266,7 +266,8 @@ INSERT INTO envia VALUES (3, 5);
 
 -----------------------------------------------------------------------
 -- Consulta envolvendo, no mínimo, 3 relações:
--- (Descrição da consulta)
+-- Verifica nome do usuario que enviou uma mensagem e o titulo e 
+-- corpo dessa mensagem
 -----------------------------------------------------------------------
 
 SELECT remetente.username, mensagem.titulo, mensagem.corpo
