@@ -1,45 +1,31 @@
-CREATE SCHEMA mac350_ep2;
-SET SEARCH_PATH TO mac350_ep2;
+CREATE SCHEMA sistema_gerenciamento_projetos;
+SET SEARCH_PATH TO sistema_gerenciamento_projetos;
 
 CREATE TABLE usuario
 (
 id SERIAL NOT NULL,
 username VARCHAR(50) NOT NULL UNIQUE,
+email VARCHAR(50) NOT NULL,
 senha VARCHAR(30) NOT NULL,
-email VARCHAR (50) NOT NULL UNIQUE,
 data_horario_criacao TIMESTAMP NOT NULL,
-PRIMARY KEY (id)
+PRIMARY KEY(id)
 );
 
 CREATE TABLE mensagem
 (
-numero_mensagem SERIAL NOT NULL,
-nome_remetente VARCHAR(50) NOT NULL,
+id SERIAL NOT NULL,
 titulo VARCHAR(100) NOT NULL,
-corpo VARCHAR(100),
+corpo VARCHAR(300),
 data_horario TIMESTAMP NOT NULL,
-PRIMARY KEY(numero_mensagem),
+PRIMARY KEY(id)
 );
 
 CREATE TABLE grupo
 (
 id SERIAL NOT NULL,
-nome_grupo VARCHAR(50) NOT NULL,
+nome VARCHAR(50) NOT NULL UNIQUE,
 data_horario_criacao TIMESTAMP NOT NULL,
 PRIMARY KEY(id)
-);
-
-CREATE TABLE atividade
-(
-numero_atividade SERIAL NOT NULL,
-titulo VARCHAR(100) NOT NULL,
-corpo VARCHAR(100),
-prazo DATE NOT NULL,
-data_horario_criacao TIMESTAMP NOT NULL,
-grupoid INTEGER NOT NULL;
-PRIMARY KEY(numero_atividade),
-FOREIGN KEY(grupoid) REFERENCES grupo(id)
-  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE projeto
@@ -48,9 +34,22 @@ id SERIAL NOT NULL,
 titulo VARCHAR(100) NOT NULL,
 descricao VARCHAR(500),
 data_horario_criacao TIMESTAMP NOT NULL,
-grupoid INTEGER NOT NULL,
+grupo_id INTEGER NOT NULL,
 PRIMARY KEY(id),
-FOREIGN KEY(grupo) REFERENCES grupo(id)
+FOREIGN KEY(grupo_id) REFERENCES grupo(id)
+  ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE atividade
+(
+id SERIAL NOT NULL,
+titulo VARCHAR(100) NOT NULL,
+descricao VARCHAR(300),
+prazo DATE NOT NULL,
+data_horario_criacao TIMESTAMP NOT NULL,
+grupo_id INTEGER NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY(grupo_id) REFERENCES grupo(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -63,90 +62,90 @@ PRIMARY KEY(cor, nome)
 
 CREATE TABLE administra
 (
-grupoid INTEGER NOT NULL,
-userid INTEGER NOT NULL,
-dt_inicio TIMESTAMP NOT NULL,
-dt_fim TIMESTAMP NOT NULL CHECK (dt_fim > dt_inicio),
-PRIMARY KEY(grupoid, userid),
-FOREIGN KEY(grupoid) REFERENCES grupo(id)
-  ON DELETE CASCADE ON UPDATE CASCADE
-FOREIGN KEY(userid) REFERENCES usuario(id)
+grupo_id INTEGER NOT NULL,
+user_id INTEGER NOT NULL,
+data_inicio TIMESTAMP NOT NULL,
+data_fim TIMESTAMP NOT NULL CHECK (data_fim > data_inicio),
+PRIMARY KEY(grupo_id, user_id),
+FOREIGN KEY(grupo_id) REFERENCES grupo(id)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(user_id) REFERENCES usuario(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE participa_de
 (
-grupoid INTEGER NOT NULL,
-userid INTEGER NOT NULL,
-dt_inicio TIMESTAMP NOT NULL,
-dt_fim TIMESTAMP NOT NULL CHECK (dt_fim > dt_inicio),
-PRIMARY KEY(grupoid, userid),
-FOREIGN KEY(grupoid) REFERENCES grupo(id)
-  ON DELETE CASCADE ON UPDATE CASCADE
-FOREIGN KEY(userid) REFERENCES usuario(id)
+grupo_id INTEGER NOT NULL,
+user_id INTEGER NOT NULL,
+data_inicio TIMESTAMP NOT NULL,
+data_fim TIMESTAMP NOT NULL CHECK (data_fim > data_inicio),
+PRIMARY KEY(grupo_id, user_id),
+FOREIGN KEY(grupo_id) REFERENCES grupo(id)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(user_id) REFERENCES usuario(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE possui
 (
-numero_atividade INTEGER NOT NULL,
+atividade_id INTEGER NOT NULL,
 cor_tag VARCHAR(50) NOT NULL,
 nome_tag VARCHAR(50) NOT NULL,
-PRIMARY KEY(numero_atividade, cor_tag, nome_tag),
+PRIMARY KEY(atividade_id, cor_tag, nome_tag),
 FOREIGN KEY(cor_tag, nome_tag) REFERENCES tag(cor, nome),
-FOREIGN KEY(numero_atividade) REFERENCES atividade(numero_atividade)
+FOREIGN KEY(atividade_id) REFERENCES atividade(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE usuario_grupo
 (
-userid INTEGER NOT NULL,
-grupoid INTEGER NOT NULL,
-PRIMARY KEY(userid, grupoid),
-FOREIGN KEY(userid) REFERENCES usuario(id)
+user_id INTEGER NOT NULL,
+grupo_id INTEGER NOT NULL,
+PRIMARY KEY(user_id, grupo_id),
+FOREIGN KEY(user_id) REFERENCES usuario(id)
   ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY(grupoid) REFERENCES grupo(id)
+FOREIGN KEY(grupo_id) REFERENCES grupo(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE nome_destinatario
+CREATE TABLE destinatario_mensagem
 (
-numero_mensagem INTEGER NOT NULL,
+mensagem_id INTEGER NOT NULL,
 destinatario INTEGER NOT NULL,
-  PRIMARY KEY(destinatario),
-  FOREIGN KEY(numero_mensagem) REFERENCES mensagem(numero_mensagem)
-  FOREIGN KEY(destinatario) REFERENCES usuario(id)
-    ON DELETE CASCADE ON UPDATE CASCADE
+PRIMARY KEY(mensagem_id, destinatario),
+FOREIGN KEY(mensagem_id) REFERENCES mensagem(id),
+FOREIGN KEY(destinatario) REFERENCES usuario(id)
+  ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE usuario_atividade
 (
-userid INTEGER NOT NULL,
-numero_atividade INTEGER NOT NULL,
-PRIMARY KEY(userid, numero_mensagem),
-FOREIGN KEY(userid) REFERENCES usuario(id)
+user_id INTEGER NOT NULL,
+atividade_id INTEGER NOT NULL,
+PRIMARY KEY(user_id, atividade_id),
+FOREIGN KEY(user_id) REFERENCES usuario(id)
   ON DELETE RESTRICT ON UPDATE RESTRICT,
-FOREIGN KEY(numero_atividade) REFERENCES atividade(numero_atividade)
+FOREIGN KEY(atividade_id) REFERENCES atividade(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE requisito_funcional
 (
-projetoid INTEGER NOT NULL,
+projeto_id INTEGER NOT NULL,
 titulo VARCHAR(100) NOT NULL,
 descricao VARCHAR(500),
-PRIMARY KEY(projetoid, titulo, descricao),
-FOREIGN KEY(projetoid) REFERENCES projeto(id)
+PRIMARY KEY(projeto_id, titulo, descricao),
+FOREIGN KEY(projeto_id) REFERENCES projeto(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE requisito_dado
 (
-projetoid INTEGER NOT NULL,
+projeto_id INTEGER NOT NULL,
 titulo VARCHAR(100) NOT NULL,
 descricao VARCHAR(500),
-PRIMARY KEY(projetoid, titulo, descricao),
-FOREIGN KEY(projetoid) REFERENCES projeto(id)
+PRIMARY KEY(projeto_id, titulo, descricao),
+FOREIGN KEY(projeto_id) REFERENCES projeto(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -154,30 +153,30 @@ CREATE TABLE convida
 (
 user_admin INTEGER NOT NULL,
 user_convidado INTEGER NOT NULL,
-grupoid INTEGER NOT NULL,
+grupo_id INTEGER NOT NULL,
 data_horario TIMESTAMP NOT NULL,
-PRIMARY KEY (user_admin, user_convidado, grupoid),
+PRIMARY KEY (user_admin, user_convidado, grupo_id),
 FOREIGN KEY(user_admin) REFERENCES usuario(id)
-  ON DELETE CASCADE ON UPDATE CASCADE
+  ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(user_convidado) REFERENCES usuario(id)
-  ON DELETE CASCADE ON UPDATE CASCADE
-FOREIGN KEY(grupoid) REFERENCES grupo(id)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(grupo_id) REFERENCES grupo(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE realiza
 (
-userid INTEGER NOT NULL,
-numero_atividade INTEGER NOT NULL,
-numero_projeto INTEGER NOT NULL,
+user_id INTEGER NOT NULL,
+atividade_id INTEGER NOT NULL,
+projeto_id INTEGER NOT NULL,
 data_inicio DATE NOT NULL,
 data_fim DATE NOT NULL,
-PRIMARY KEY(userid, numero_atividade, numero_projeto),
-FOREIGN KEY(userid) REFERENCES usuario(id)
+PRIMARY KEY(user_id, atividade_id, projeto_id),
+FOREIGN KEY(user_id) REFERENCES usuario(id)
   ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY(numero_atividade) REFERENCES atividade(numero_atividade)
-  ON DELETE CASCADE ON UPDATE CASCADE
-FOREIGN KEY(numero_projeto) REFERENCES projeto(id)
+FOREIGN KEY(atividade_id) REFERENCES atividade(id)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(projeto_id) REFERENCES projeto(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -185,12 +184,12 @@ CREATE TABLE envia
 (
 user_remetente INTEGER NOT NULL,
 user_destinatario INTEGER NOT NULL,
-numero_mensagem INTEGER NOT NULL,
-PRIMARY KEY(user_remetente, user_destinatario, numero_mensagem),
+mensagem_id INTEGER NOT NULL,
+PRIMARY KEY(user_remetente, user_destinatario, mensagem_id),
 FOREIGN KEY(user_remetente) REFERENCES usuario(id)
   ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(user_destinatario) REFERENCES usuario(id)
   ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY(numero_mensagem) REFERENCES mensagem(numero_mensagem)
+FOREIGN KEY(mensagem_id) REFERENCES mensagem(id)
   ON DELETE CASCADE ON UPDATE CASCADE
 );
