@@ -214,11 +214,6 @@ FOREIGN KEY(mensagem_id) REFERENCES mensagem(id)
 -- Inserção de tuplas para povoar o BD
 -----------------------------------------------------------------------
 
------------------------------------------------------------------------
--- Consulta envolvendo, no mínimo, 3 relações:
--- (Descrição da consulta)
------------------------------------------------------------------------
-
 INSERT INTO usuario (id, username, email, senha) VALUES (1, "ian", "ian@ime.usp.br", "123456");
 INSERT INTO usuario (id, username, email, senha) VALUES (2, "leonardo", "leonardo@ime.usp.br", "leonardo_123");
 INSERT INTO usuario (id, username, email, senha) VALUES (3, "isabella", "isabella@ime.usp.br", "isabella_123");
@@ -249,7 +244,6 @@ INSERT INTO tag VALUES ("Verde", "Entregue");
 INSERT INTO possui VALUES (1, "Vermelho", "Alta prioridade");
 INSERT INTO possui VALUES (2, "Verde", "Entregue");
 
-
 INSERT INTO usuario_atividade VALUES (1, 1);
 INSERT INTO usuario_atividade VALUES (3, 1);
 
@@ -259,15 +253,10 @@ INSERT INTO convida VALUES (6, 3, 1, current_timestamp);
 INSERT INTO convida VALUES (6, 4, 1, current_timestamp);
 INSERT INTO convida VALUES (6, 5, 1, current_timestamp);
 
-
 INSERT INTO mensagem VALUES (1, "Entrega tarefa", "Ola, professor. Entreguei a atividade 1 que estava sob minha responsabilidade", current_timestamp);
-
 INSERT INTO mensagem VALUES (2, "Status Grupo", "Ola, jef. Acredito que vamos atrasar, precisamos melhorar a distribuicao das tarefas", current_timestamp);
-
 INSERT INTO mensagem VALUES (3, "Ajuda", "Jef, nao estou conseguindo avancar na tarefa pois estou tendo dificuldades em comunicar com o BD, pode me ajudar?", current_timestamp);
-
 INSERT INTO mensagem VALUES (4, "Tarefa", "Ola, Isa. Como esta a entrega da tarefa? Preciso dela para dar continuidade ao meu trabalho", current_timestamp);
-
 INSERT INTO mensagem VALUES (5, "Cobranca", "Vamos, Ian, termina essa tarefa, temos um prazo a cumprir", current_timestamp);
 
 
@@ -277,8 +266,10 @@ INSERT INTO envia VALUES (2, 6, 3);
 INSERT INTO envia VALUES (5, 3, 4);
 INSERT INTO envia VALUES (3, 1, 5);
 
-
-
+-----------------------------------------------------------------------
+-- Consulta envolvendo, no mínimo, 3 relações:
+-- (Descrição da consulta)
+-----------------------------------------------------------------------
 
 SELECT remetente.username, destinatario.username, mensagem.titulo, mensagem.corpo
 FROM envia
