@@ -269,13 +269,11 @@ INSERT INTO envia VALUES (3, 5);
 -- (Descrição da consulta)
 -----------------------------------------------------------------------
 
-SELECT remetente.username, destinatario.username, mensagem.titulo, mensagem.corpo
+SELECT remetente.username, mensagem.titulo, mensagem.corpo
 FROM envia
     INNER JOIN mensagem 
         ON mensagem.id = envia.mensagem_id
     INNER JOIN usuario as remetente
         ON remetente.id = envia.user_remetente
-    INNER JOIN usuario as destinatario
-        ON destinatario.id = envia.user_destinatario
-    WHERE user_destinatario = 6;
+    WHERE user_remetente = 1;
         
