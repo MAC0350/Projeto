@@ -234,6 +234,7 @@ INSERT INTO pertence_a (user_id, grupo_id) VALUES (5, 1);
 INSERT INTO pertence_a (user_id, grupo_id) VALUES (6, 1);
 
 INSERT INTO administra VALUES (1, 6, current_timestamp, '2022-12-25');
+
 INSERT INTO atividade VALUES (1, "Criacao Modelo fisico", "Criar o modelo fisico para a tabela", "2017-10-26", current_timestamp, 1);
 INSERT INTO atividade VALUES (2, "Queries no BD", "Realizar queries que envolvam ao menos tres relacoes no banco de dados", "2017-10-26", current_timestamp, 1);
 
