@@ -95,7 +95,7 @@ grupo_id INTEGER NOT NULL,
 projeto_id INTEGER NOT NULL,
 data_inicio TIMESTAMP NOT NULL DEFAULT current_timestamp,
 data_fim TIMESTAMP CHECK (data_fim > data_inicio),
-PRIMARY KEY(grupo_id, user_id),
+PRIMARY KEY(grupo_id, projeto_id),
 FOREIGN KEY(grupo_id) REFERENCES grupo(id)
   ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(projeto_id) REFERENCES projeto(id)
@@ -200,10 +200,8 @@ CREATE TABLE envia
 (
 user_remetente INTEGER NOT NULL,
 mensagem_id INTEGER NOT NULL,
-PRIMARY KEY(user_remetente, user_destinatario, mensagem_id),
+PRIMARY KEY(user_remetente, mensagem_id),
 FOREIGN KEY(user_remetente) REFERENCES usuario(id)
-  ON DELETE CASCADE ON UPDATE CASCADE,
-FOREIGN KEY(user_destinatario) REFERENCES usuario(id)
   ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(mensagem_id) REFERENCES mensagem(id)
   ON DELETE CASCADE ON UPDATE CASCADE
