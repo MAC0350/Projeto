@@ -58,7 +58,7 @@ echo -e "\e[36m>> Installing requirements found in '$REQ'\e[0m"
 if [ ! -f "$REQ" ]; then
     echo -e "\e[31m>> ERROR: '$REQ' not found!\e[0m"
 else
-    pip -v install -r $REQ
+    pip install -r $REQ
 fi
 
 echo -e "\e[36m>> Done!\e[0m"
