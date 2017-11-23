@@ -1,0 +1,9 @@
+# Virtualenv-related files
+bin/
+include/
+lib/
+pip-selfcheck.json
+
+# Python-generated files
+__pycache__
+*.pyc
