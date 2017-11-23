@@ -7,3 +7,6 @@ pip-selfcheck.json
 # Python-generated files
 __pycache__
 *.pyc
+
+# Database-related files
+db.sqlite3
