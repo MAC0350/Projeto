@@ -37,8 +37,10 @@ class Atividade(models.Model):
 
 
 class Convida(models.Model):
-    user_admin = models.ForeignKey('Usuario', db_column='user_admin')
-    user_convidado = models.ForeignKey('Usuario', db_column='user_convidado')
+    user_admin = models.ForeignKey('Usuario', db_column='user_admin',
+                                   related_name='admin')
+    user_convidado = models.ForeignKey('Usuario', db_column='user_convidado',
+                                       related_name='convidado')
     grupo = models.ForeignKey('Grupo')
     data_horario = models.DateTimeField()
 
