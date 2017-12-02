@@ -1,0 +1,34 @@
+<html lang="pt-br">
+
+<head>
+<meta charset="utf-8">
+<title>Grupos</title>
+</head>
+
+<body>
+<h1>Sistema de Gerenciamento de Projetos</h1>
+
+<article>
+<h2>Grupos</h2>
+<table>
+  <tr>
+      <th>Nome</th>
+      <th>Nº de integrantes</th>
+      <th>Data de criação</th>
+  </tr>
+  {% for name, members, time in groups %}
+  <tr>
+    <td>{{name}}</td>
+    <td>{{members}}</td>
+    <td>{{time}}</td>
+  </tr>
+  {% endfor %}
+</table>
+</article>
+
+<footer>
+<p><a href="index">&#8592; Voltar para a página principal</a></p>
+</footer>
+</body>
+
+</html>
