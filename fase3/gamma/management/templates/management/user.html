@@ -1,0 +1,24 @@
+<html lang="pt-br">
+
+<head>
+<meta charset="utf-8">
+<title>Usuários</title>
+</head>
+
+<body>
+<h1>Usuários</h1>
+<table>
+  {% for usuario in usuarios %}
+  <tr>
+    <th>{{usuario.username}}</th>
+    <th>{{usuario.email}}</th>
+  </tr>
+  {% endfor %}
+</table>
+
+<footer>
+<p><a href="index">&#8592; Voltar para a página principal</a></p>
+</footer>
+</body>
+
+</html>
