@@ -1,0 +1,28 @@
+<html lang="pt-br">
+
+<head>
+<meta charset="utf-8">
+<title>Criação de usuário</title>
+</head>
+
+<body>
+<h1>Sistema de Gerenciamento de Projetos</h1>
+
+<article>
+<h2>Criação de usuário</h2>
+<p>Preencha os campos abaixo para criar um usuário.</p>
+{% block content %}
+<form method="POST" class="post-form">{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="save btn btn-default">Salvar</button>
+</form>
+{% endblock %}
+</article>
+
+<footer>
+<p><a href="../">&#8592; Voltar à página de usuários</a></p>
+<p><a href="../../">&#8592; Voltar para a página principal</a></p>
+</footer>
+</body>
+
+</html>
