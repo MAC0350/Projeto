@@ -6,15 +6,23 @@
 </head>
 
 <body>
-<h1>Usuários</h1>
+<h1>Sistema de Gerenciamento de Projetos</h1>
+
+<article>
+<h2>Usuários</h2>
 <table>
+  <tr>
+      <th>Username</th>
+      <th>Email</th>
+  </tr>
   {% for usuario in usuarios %}
   <tr>
-    <th>{{usuario.username}}</th>
-    <th>{{usuario.email}}</th>
+    <td>{{usuario.username}}</td>
+    <td>{{usuario.email}}</td>
   </tr>
   {% endfor %}
 </table>
+</article>
 
 <footer>
 <p><a href="index">&#8592; Voltar para a página principal</a></p>
