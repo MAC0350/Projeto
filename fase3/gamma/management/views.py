@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from .models import Usuario, Grupo, PertenceA
 from .forms import UsuarioForm
@@ -11,7 +11,7 @@ def user(request):
     usuarios = Usuario.objects.order_by('username')
     return render(request, 'management/user.html', {'usuarios': usuarios})
 
-def user_edit(request):
+def user_new(request):
     if request.method == "POST":
         form = UsuarioForm(request.POST)
         if form.is_valid():
@@ -22,6 +22,15 @@ def user_edit(request):
     else:
         form = UsuarioForm()
     return render(request, 'management/user_edit.html', {'form': form})
+
+def user_delete(request, username):
+    user = get_object_or_404(Usuario, username=username)
+    if request.method == 'POST':
+        Usuario.objects.get(username=username).delete()
+        return redirect('../../')
+    else:
+        user = Usuario.objects.get(username=username)
+        return render(request, 'management/user_delete.html', {'user': user})
 
 def group(request):
     groups = Grupo.objects.order_by('nome')
