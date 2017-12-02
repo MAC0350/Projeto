@@ -24,7 +24,7 @@ class Administra(models.Model):
 
 
 class Atividade(models.Model):
-    id = models.IntegerField(primary_key=True)  # AutoField?
+    id = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=100)
     descricao = models.CharField(max_length=300, blank=True)
     prazo = models.DateField()
@@ -68,7 +68,7 @@ class Envia(models.Model):
 
 
 class Grupo(models.Model):
-    id = models.IntegerField(primary_key=True)  # AutoField?
+    id = models.AutoField(primary_key=True)
     nome = models.CharField(unique=True, max_length=50)
     data_horario_criacao = models.DateTimeField()
 
@@ -78,7 +78,7 @@ class Grupo(models.Model):
 
 
 class Mensagem(models.Model):
-    id = models.IntegerField(primary_key=True)  # AutoField?
+    id = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=100)
     corpo = models.CharField(max_length=300, blank=True)
     data_horario = models.DateTimeField()
@@ -119,7 +119,7 @@ class Possui(models.Model):
 
 
 class Projeto(models.Model):
-    id = models.IntegerField(primary_key=True)  # AutoField?
+    id = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=100)
     descricao = models.CharField(max_length=500, blank=True)
     data_horario_criacao = models.DateTimeField()
@@ -172,7 +172,7 @@ class Tag(models.Model):
 
 
 class Usuario(models.Model):
-    id = models.IntegerField(primary_key=True)  # AutoField?
+    id = models.AutoField(primary_key=True)
     username = models.CharField(unique=True, max_length=50)
     email = models.CharField(max_length=50)
     senha = models.CharField(max_length=30)
