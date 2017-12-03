@@ -9,8 +9,8 @@ def index(request):
     return render(request, 'management/index.html')
 
 def user(request):
-    usuarios = Usuario.objects.order_by('username')
-    return render(request, 'management/user.html', {'usuarios': usuarios})
+    users = Usuario.objects.order_by('username')
+    return render(request, 'management/user.html', {'users': users})
 
 def user_new(request):
     if request.method == "POST":
@@ -63,16 +63,16 @@ def group(request):
     return render(request, 'management/group.html', {'groups': name_num})
 
 def project(request):
-    projetos = Projeto.objects.order_by('data_horario_criacao')
-    return render(request, 'management/project.html', {'projetos': projetos})
+    projects = Projeto.objects.order_by('data_horario_criacao')
+    return render(request, 'management/project.html', {'projects': projects})
 
 def project_new(request):
     if request.method == "POST":
         form = ProjetoForm(request.POST)
         if form.is_valid():
-            projeto = form.save(commit=False)
-            projeto.data_horario_criacao = timezone.now()
-            projeto.save()
+            project = form.save(commit=False)
+            project.data_horario_criacao = timezone.now()
+            project.save()
             return redirect('../')
     else:
         form = ProjetoForm()

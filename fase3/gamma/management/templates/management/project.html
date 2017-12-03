@@ -29,12 +29,12 @@
     </tr>
   </thead>
   <tbody>
-    {% for projeto in projetos %}
+    {% for project in projects %}
     <tr>
-      <td>{{projeto.titulo}}</td>
-      <td>{{projeto.descricao}}</td>
-      <td>{{projeto.data_horario_criacao}}</td>
-      <td>{{projeto.grupo.nome}}</td>
+      <td>{{project.titulo}}</td>
+      <td>{{project.descricao}}</td>
+      <td>{{project.data_horario_criacao}}</td>
+      <td>{{project.grupo.nome}}</td>
     </tr>
     {% endfor %}
   </tbody>
