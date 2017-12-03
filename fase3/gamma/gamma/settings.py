@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': os.environ.get('DATABASE_NAME', ''),
         'USER': os.environ.get('DATABASE_USER', ''),
         'OPTIONS': {
-            'options': '-c search_path=sistema_gerenciamento_projetos'
+            'options': '-c search_path="BD350"'
         },
         'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
         'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
