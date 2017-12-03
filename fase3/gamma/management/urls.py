@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^user/(?P<username>.+)/delete/$', views.user_delete,
         name='user_delete'),
     url(r'^group/$', views.group, name='group'),
-    url(r'^projeto/$', views.projeto, name='projeto'),
-    url(r'^projeto/new/$', views.projeto_new, name='projeto_new')
+    url(r'^project/$', views.project, name='project'),
+    url(r'^project/new/$', views.project_new, name='project_new')
 ]

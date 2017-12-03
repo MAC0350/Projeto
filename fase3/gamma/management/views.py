@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
+
 from .models import Usuario, Grupo, PertenceA, Projeto
-from .forms import UsuarioForm
-from .projeto import ProjetoForm
+from .forms import UsuarioForm, ProjetoForm
 
 # Create your views here.
 def index(request):
@@ -62,11 +62,11 @@ def group(request):
     name_num = zip(names, num_members, times)
     return render(request, 'management/group.html', {'groups': name_num})
 
-def projeto(request):
+def project(request):
     projetos = Projeto.objects.order_by('data_horario_criacao')
-    return render(request, 'management/projeto.html', {'projetos': projetos})
+    return render(request, 'management/project.html', {'projetos': projetos})
 
-def projeto_new(request):
+def project_new(request):
     if request.method == "POST":
         form = ProjetoForm(request.POST)
         if form.is_valid():
@@ -76,7 +76,6 @@ def projeto_new(request):
             return redirect('../')
     else:
         form = ProjetoForm()
-
-
     groups = Grupo.objects.order_by('nome')
-    return render(request, 'management/projeto_new.html', {'form': form, 'groups': groups})
+    return render(request, 'management/project_new.html',
+                  {'form': form, 'groups': groups})
