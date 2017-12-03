@@ -1,0 +1,39 @@
+<html lang="pt-br">
+
+<head>
+<meta charset="utf-8">
+<title>Remoção de usuário</title>
+</head>
+
+<body>
+<h1>Sistema de Gerenciamento de Projetos</h1>
+
+<article>
+<h2>Remoção de usuário</h2>
+
+<table>
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+  <tr>
+    <td>{{user.username}}</td>
+    <td>{{user.email}}</td>
+  </tr>
+</table>
+
+<p>Você tem certeza que quer remover <b>{{ user.username }}</b>?</p>
+
+{% block content %}
+<form method="POST" class="post-form">{% csrf_token %}
+    <button type="submit" class="save btn btn-default">Sim</button>
+</form>
+{% endblock %}
+</article>
+
+<footer>
+<p><a href="../../">&#8592; Voltar para a página de usuários</a></p>
+<p><a href="../../../">&#8592; Voltar para a página principal</a></p>
+</footer>
+</body>
+
+</html>
