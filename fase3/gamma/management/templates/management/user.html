@@ -15,11 +15,13 @@
   <tr>
       <th>Username</th>
       <th>Email</th>
+      <th>Data de criação</th>
   </tr>
   {% for usuario in usuarios %}
   <tr>
     <td>{{usuario.username}}</td>
     <td>{{usuario.email}}</td>
+    <td>{{usuario.data_horario_criacao}}</td>
     <td><a href="{{usuario.username}}/edit/">Alterar</a></td>
     <td><a href="{{usuario.username}}/delete/">Remover</a></td>
   </tr>
