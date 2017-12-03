@@ -4,13 +4,16 @@ from django.utils import timezone
 from .models import Usuario, Grupo, PertenceA, Projeto
 from .forms import UsuarioForm, ProjetoForm
 
+
 # Create your views here.
 def index(request):
     return render(request, 'management/index.html')
 
+
 def user(request):
     users = Usuario.objects.order_by('username')
     return render(request, 'management/user.html', {'users': users})
+
 
 def user_new(request):
     if request.method == "POST":
@@ -24,6 +27,7 @@ def user_new(request):
         form = UsuarioForm()
     return render(request, 'management/user_edit.html',
                   {'form': form, 'new': True})
+
 
 def user_edit(request, username):
     user = get_object_or_404(Usuario, username=username)
@@ -39,6 +43,7 @@ def user_edit(request, username):
     return render(request, 'management/user_edit.html',
                   {'form': form, 'new': False})
 
+
 def user_delete(request, username):
     user = get_object_or_404(Usuario, username=username)
     if request.method == 'POST':
@@ -47,6 +52,7 @@ def user_delete(request, username):
     else:
         user = Usuario.objects.get(username=username)
         return render(request, 'management/user_delete.html', {'user': user})
+
 
 def group(request):
     groups = Grupo.objects.order_by('nome')
@@ -62,9 +68,11 @@ def group(request):
     name_num = zip(names, num_members, times)
     return render(request, 'management/group.html', {'groups': name_num})
 
+
 def project(request):
     projects = Projeto.objects.order_by('data_horario_criacao')
     return render(request, 'management/project.html', {'projects': projects})
+
 
 def project_new(request):
     if request.method == "POST":

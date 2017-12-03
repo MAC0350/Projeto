@@ -16,7 +16,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Administra',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
                 ('data_inicio', models.DateTimeField()),
                 ('data_fim', models.DateTimeField(blank=True, null=True)),
             ],
@@ -42,7 +43,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Convida',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
                 ('data_horario', models.DateTimeField()),
             ],
             options={
@@ -53,7 +55,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='DestinatarioMensagem',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
             ],
             options={
                 'db_table': 'destinatario_mensagem',
@@ -63,7 +66,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Envia',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
             ],
             options={
                 'db_table': 'envia',
@@ -98,7 +102,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ParticipaDe',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
                 ('data_inicio', models.DateTimeField()),
                 ('data_fim', models.DateTimeField(blank=True, null=True)),
             ],
@@ -110,7 +115,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PertenceA',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
             ],
             options={
                 'db_table': 'pertence_a',
@@ -120,7 +126,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Possui',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
                 ('nome_tag', models.CharField(max_length=50)),
             ],
             options={
@@ -144,7 +151,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Realiza',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
                 ('data_inicio', models.DateField()),
                 ('data_fim', models.DateField()),
             ],
@@ -156,7 +164,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RequisitoDado',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
                 ('titulo', models.CharField(max_length=100)),
                 ('descricao', models.CharField(max_length=500)),
             ],
@@ -168,7 +177,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RequisitoFuncional',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
                 ('titulo', models.CharField(max_length=100)),
                 ('descricao', models.CharField(max_length=500)),
             ],
@@ -180,7 +190,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Tag',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
                 ('cor', models.CharField(max_length=50)),
                 ('nome', models.CharField(max_length=50)),
             ],
@@ -206,7 +217,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UsuarioAtividade',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, primary_key=True,
+                 serialize=False, verbose_name='ID')),
             ],
             options={
                 'db_table': 'usuario_atividade',

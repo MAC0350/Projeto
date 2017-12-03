@@ -25,11 +25,11 @@
       <th></th>
       <th></th>
   </tr>
-  {% for usuario in usuarios %}
+  {% for user in users %}
   <tr>
-    <td>{{usuario.username}}</td>
-    <td>{{usuario.email}}</td>
-    <td>{{usuario.data_horario_criacao}}</td>
+    <td>{{user.username}}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.data_horario_criacao}}</td>
     <td><a href="{{usuario.username}}/edit/">Editar</a></td>
     <td><a href="{{usuario.username}}/delete/">Remover</a></td>
   </tr>

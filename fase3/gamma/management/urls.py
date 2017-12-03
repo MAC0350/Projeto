@@ -11,5 +11,5 @@ urlpatterns = [
         name='user_delete'),
     url(r'^group/$', views.group, name='group'),
     url(r'^project/$', views.project, name='project'),
-    url(r'^project/new/$', views.project_new, name='project_new')
+    url(r'^project/new/$', views.project_new, name='project_new'),
 ]
