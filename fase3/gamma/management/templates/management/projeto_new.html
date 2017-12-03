@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <html lang="pt-br">
 
 <head>
@@ -6,13 +7,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <title>Projetos</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <title>Criação de projeto</title>
 </head>
 
 <body>
-<h1 style="text-align: center">Sistema de Gerenciamento de Projetos</h1>
+<h1>Sistema de Gerenciamento de Projetos</h1>
 
-<h2 style="text-align: center">Criação/edição de projeto</h2>
+<h2>Criação de projeto</h2>
 <div style="text-align: justify; border: 1px;">
 {% block content %}
   <form method="POST" class="post-form">{% csrf_token %}
