@@ -22,7 +22,8 @@ def user_new(request):
             return redirect('../')
     else:
         form = UsuarioForm()
-    return render(request, 'management/user_edit.html', {'form': form})
+    return render(request, 'management/user_edit.html',
+                  {'form': form, 'new': True})
 
 def user_edit(request, username):
     user = get_object_or_404(Usuario, username=username)
@@ -35,7 +36,8 @@ def user_edit(request, username):
         form = UsuarioForm(instance=user)
         # User can't change their username!
         form.fields['username'].widget.attrs['readonly'] = True
-    return render(request, 'management/user_edit.html', {'form': form})
+    return render(request, 'management/user_edit.html',
+                  {'form': form, 'new': False})
 
 def user_delete(request, username):
     user = get_object_or_404(Usuario, username=username)

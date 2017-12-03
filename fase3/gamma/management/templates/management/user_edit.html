@@ -7,14 +7,19 @@
   <script   src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
-  <title>Criação/edição de usuário</title>
+  <title>{% if new %}Criação{% else %}Edição{% endif %} de usuário</title>
 </head>
 
 <body>
 <h1>Sistema de Gerenciamento de Projetos</h1>
 
-<h2>Criação/edição de usuário</h2>
-<p>Preencha os campos abaixo para criar/editar um usuário.</p>
+<h2>{% if new %}Criação{% else %}Edição{% endif %} de usuário</h2>
+<p>Preencha os campos abaixo para {% if new %}criar{% else %}editar{% endif %} um usuário.</p>
+
+{% if not new %}
+  <p>Não é permitido modificar o campo <b>Username</b>.</p>
+{% endif %}
+
 {% block content %}
 <form method="POST" class="post-form">{% csrf_token %}
   {{form.as_p}}
