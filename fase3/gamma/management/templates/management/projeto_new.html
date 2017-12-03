@@ -1,29 +1,37 @@
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Projetos</title>
-  </head>
+<html lang="pt-br">
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Projetos</title>
+</head>
+
+<body>
+<h1 style="text-align: center">Sistema de Gerenciamento de Projetos</h1>
+
+<h2 style="text-align: center">Criação/edição de projeto</h2>
 <div style="text-align: justify; border: 1px;">
 {% block content %}
-    <h1>Novo Projeto</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-		<p><label for="id_titulo">Titulo:</label> <input type="text" name="titulo" required maxlength="100" id="id_titulo" /></p>
-		<p><label for="id_descricao">Descricao:</label> <input type="text" name="descricao" maxlength="500" id="id_descricao" /></p>
-		<p><label for="id_grupo">Grupo:</label> <select name="grupo" required id="id_grupo">
-			{% for group in groups %}
-			    <option value="{{ group.id }}">{{ group.nome }}</option>
-			{% endfor %}
-		</select></p>
-		<button type="submit" class="save btn btn-default">Salvar</button>
-    </form>
+  <form method="POST" class="post-form">{% csrf_token %}
+    <p><label for="id_titulo">Titulo:</label> <input type="text" name="titulo" required maxlength="100" id="id_titulo" /></p>
+    <p><label for="id_descricao">Descricao:</label> <input type="text" name="descricao" maxlength="500" id="id_descricao" /></p>
+    <p><label for="id_grupo">Grupo:</label> <select name="grupo" required id="id_grupo">
+      {% for group in groups %}
+        <option value="{{ group.id }}">{{ group.nome }}</option>
+      {% endfor %}
+    </select></p>
+    <button type="submit" class="save btn btn-default">Salvar</button>
+  </form>
 {% endblock %}
 </div>
 
 <footer>
-	<p><a href="../">&#8592; Voltar à página de projetos</a></p>
-	<p><a href="../../">&#8592; Voltar para a página principal</a></p>
+  <p><a href="../">&#8592; Voltar para a página de projetos</a></p>
+  <p><a href="../../">&#8592; Voltar para a página principal</a></p>
 </footer>
+</body>
+
+</html>
