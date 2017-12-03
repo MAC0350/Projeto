@@ -2,20 +2,26 @@
 
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Usuários</title>
 </head>
 
 <body>
-<h1>Sistema de Gerenciamento de Projetos</h1>
+<h1 style="text-align: center">Sistema de Gerenciamento de Projetos</h1>
 
 <article>
-<h2>Usuários</h2>
+<h2 style="text-align: center">Usuários</h2>
 <p>Crie um novo usuário <a href="new/">aqui</a>.</p>
-<table>
+<div class="container">
+<table class="table table-striped">
   <tr>
       <th>Username</th>
       <th>Email</th>
       <th>Data de criação</th>
+      <th></th>
+      <th></th>
   </tr>
   {% for usuario in usuarios %}
   <tr>
@@ -27,6 +33,7 @@
   </tr>
   {% endfor %}
 </table>
+</div>
 </article>
 
 <footer>

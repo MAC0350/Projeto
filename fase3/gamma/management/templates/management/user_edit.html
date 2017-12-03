@@ -2,14 +2,17 @@
 
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Criação de usuário</title>
 </head>
 
 <body>
-<h1>Sistema de Gerenciamento de Projetos</h1>
+<h1 style="text-align: center">Sistema de Gerenciamento de Projetos</h1>
 
 <article>
-<h2>Criação de usuário</h2>
+<h2 style="text-align: center">Criação de usuário</h2>
 <p>Preencha os campos abaixo para criar um usuário.</p>
 {% block content %}
 <form method="POST" class="post-form">{% csrf_token %}
