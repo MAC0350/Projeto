@@ -1,5 +1,6 @@
 #!/bin/bash
-# Script that adds a Python 3 virtual environment to an existing directory.
+# Script that adds a Python 3 virtual environment to an existing
+# directory.
 
 set -e
 
@@ -29,7 +30,6 @@ function usage {
 }
 
 # --------------------------------------------------------------------
-# MAIN
 
 # Go to project root directory
 cd "$(dirname "${BASH_SOURCE[0]}")"

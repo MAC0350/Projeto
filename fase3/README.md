@@ -8,7 +8,7 @@
 - (8536200) Isabella Mendonça
 - (8536065) Leonardo Pereira Macedo
 
-Este diretório representa a fase 3 do projeto da disciplina **MAC0350 -- Princípios de Desenvolvimento de Software**, ministrada pelo professor João Eduardo Ferreira.
+Este diretório representa a fase 3 do projeto da disciplina **MAC0350 - Princípios de Desenvolvimento de Software**, ministrada pelo professor João Eduardo Ferreira.
 
 
 ## Organização
