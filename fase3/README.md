@@ -8,7 +8,8 @@
 - (8536200) Isabella Mendonça
 - (8536065) Leonardo Pereira Macedo
 
-Este diretório representa a fase 3 do projeto da disciplina **MAC0350 - Princípios de Desenvolvimento de Software**, ministrada pelo professor João Eduardo Ferreira.
+Este diretório representa a fase 3 do projeto da disciplina **MAC0350 - Princípios
+de Desenvolvimento de Software**, ministrada pelo professor João Eduardo Ferreira.
 
 
 ## Organização
@@ -21,9 +22,12 @@ O projeto é organizado nos seguintes arquivos e diretórios:
 - `gamma/`: Diretório contendo o servidor Django (em Python 3). "Gamma" refere-se ao
   nome do servidor.
 
-- `sql/`: Contém os arquivos `queries.sql`, representando as consultas feitas no
-  servidor Django em SQL puro, e `create-db.sql`, que cria e popula o banco de dados
-  Postgresql.
+- `sql/`: Contém três arquivos em SQL:
+
+  - `create-db.sql` cria e popula o banco de dados Postgresql.
+  - `queries.sql` representa as consultas feitas no servidor Django em SQL puro.
+  - `id-fix.sql` corrige os campos AutoField dos modelos, fazendo com que os IDs de
+    novas tuplas inseridas não conflitam com o conteúdo já existente numa relação.
 
 - `pyvenv.sh`: *Script* que auxilia na criação de um virtualenv para Python 3.
 
@@ -56,7 +60,7 @@ Django. É necessário um sistema operacional *Unix*, com acesso ao terminal.
 ### Postgresql & Django
 
 1. Execute o script `create-db.sql` em `sql/` para criar e popular o banco de dados
-   (Postgresql). Após fazer o login neste, faça:
+   (Postgresql). Após fazer o login no Postgresql, faça:
 
         => \i sql/create-db.sql
 
@@ -69,7 +73,7 @@ Django. É necessário um sistema operacional *Unix*, com acesso ao terminal.
     - `DATABASE_HOST`: Nome do *host* para conexão com o banco de dados.
     - `DATABASE_PORT`: Número da porta para conexão com o banco de dados.
 
-  Por exemplo:
+   Por exemplo:
 
         $ export DATABASE_NAME='meu_bd'
 
@@ -78,6 +82,10 @@ Django. É necessário um sistema operacional *Unix*, com acesso ao terminal.
         $ cd gamma/
         $ ./manage.py makemigrations
         $ ./manage.py migrate
+
+4. Use o *script* `id-fix.sql` para corrigir os campos AutoField dos modelos Django:
+
+        $ cat ../sql/id-fix.sql | ./manage.py dbshell
 
 
 ## Execução

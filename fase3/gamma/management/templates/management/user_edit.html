@@ -14,7 +14,7 @@
 <h1>Sistema de Gerenciamento de Projetos</h1>
 
 <h2>{% if new %}Criação{% else %}Edição{% endif %} de usuário</h2>
-<p>Preencha os campos abaixo para {% if new %}criar{% else %}editar{% endif %} um usuário.</p>
+<p>{% if new %}Preencha{% else %}Altere{% endif %} os campos abaixo para {% if new %}criar{% else %}editar{% endif %} um usuário.</p>
 
 {% if not new %}
   <p>Não é permitido modificar o campo <b>Username</b>.</p>
